@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const url = 'https://www.course-api.com/react-tours-project';
@@ -25,11 +26,13 @@ async function ToursPage() {
                     return (
                         <div key={tour.id} className='hover:text-blue-500'>
                             <div className='relative h-48 mb-2'>
-                                <img
-                                    src={tour.image}
-                                    alt={tour.name}
-                                    className='object-cover rounded'
-                                />
+                                <Link href={`/tours/${tour.id}`}>
+                                    <img
+                                        src={tour.image}
+                                        alt={tour.name}
+                                        className='object-cover rounded'
+                                    />
+                                </Link>
                             </div>
                             <h2>{tour.name}</h2>
                         </div>
