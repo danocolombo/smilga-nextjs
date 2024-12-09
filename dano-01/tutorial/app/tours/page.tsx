@@ -11,7 +11,7 @@ type Tour = {
     price: string;
 };
 const fetchTours = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     const response = await fetch(url);
     const data: Tour[] = await response.json();
     return data;

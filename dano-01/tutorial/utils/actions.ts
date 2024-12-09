@@ -1,5 +1,4 @@
 'use server';
-// this fs/promises is a nodejs module for dev example only, will not work in production
 import { readFile, writeFile } from 'fs/promises';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -12,16 +11,12 @@ type User = {
 
 export const createUser = async (prevState: any, formData: FormData) => {
     'use server';
-    // console.log(prevState);
+    console.log(prevState);
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     const firstName = formData.get('firstName') as string;
     const lastName = formData.get('lastName') as string;
     const newUser: User = { firstName, lastName, id: Date.now().toString() };
-
-    // can also get the rawData from the form
-    // const rawData = Object.fromEntries(formData);
-    // console.log(rawData);
 
     try {
         await saveUser(newUser);
@@ -56,7 +51,7 @@ export const deleteUser = async (formData: FormData) => {
 };
 export const removeUser = async (id: string, formData: FormData) => {
     const name = formData.get('name') as string;
-    // console.log(name);
+    console.log(name);
 
     const users = await fetchUsers();
     const updatedUsers = users.filter((user) => user.id !== id);
