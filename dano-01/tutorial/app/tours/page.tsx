@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
-
+import Image from 'next/image';
 const url = 'https://www.course-api.com/react-tours-project';
 
 type Tour = {
@@ -10,12 +9,14 @@ type Tour = {
     image: string;
     price: string;
 };
+
 const fetchTours = async () => {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
     const response = await fetch(url);
     const data: Tour[] = await response.json();
     return data;
 };
+
 async function ToursPage() {
     const data = await fetchTours();
     return (
@@ -24,23 +25,28 @@ async function ToursPage() {
             <div className='grid md:grid-cols-2 gap-8'>
                 {data.map((tour) => {
                     return (
-                        <div key={tour.id} className='hover:text-blue-500'>
+                        <Link
+                            key={tour.id}
+                            href={`/tours/${tour.id}`}
+                            className='hover:text-blue-500'
+                        >
                             <div className='relative h-48 mb-2'>
-                                <Link href={`/tours/${tour.id}`}>
-                                    <img
-                                        src={tour.image}
-                                        alt={tour.name}
-                                        className='object-cover rounded'
-                                    />
-                                </Link>
+                                <Image
+                                    src={tour.image}
+                                    alt={tour.name}
+                                    fill
+                                    sizes='(max-width:768px) 100vw,(max-width:1200px) 50vw,33vw'
+                                    priority
+                                    className='object-cover rounded'
+                                />
                             </div>
+
                             <h2>{tour.name}</h2>
-                        </div>
+                        </Link>
                     );
                 })}
             </div>
         </section>
     );
 }
-
 export default ToursPage;

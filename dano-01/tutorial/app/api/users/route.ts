@@ -1,5 +1,5 @@
 import { fetchUsers, saveUser } from '@/utils/actions';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/server';
 
 export const GET = async (request: NextRequest) => {
     // console.log(request);
